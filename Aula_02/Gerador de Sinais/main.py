@@ -9,7 +9,8 @@ layout = [
     [sg.Text('Frequência de amostragem em Hz'), sg.Input(size=(10,0), key= 'Fs')],
     [sg.Text('Tempo de amostragem em segundos'), sg.Input(size=(10,0), key= 'T')],
     [sg.Text('N inicial'), sg.Input(size=(10,0), key= 'N')],
-    [sg.Text('Valor de A'), sg.Input(size=(10, 0), key='A')],
+    [sg.Text('Valor de a (Exponencial)'), sg.Input(size=(10, 0), key='A')],
+    [sg.Text('Amplitude do sinal'), sg.Input(size=(10, 0), key='Amplitude')],
     [sg.Checkbox('Cos', key= 'Cos'), sg.Checkbox('Sen', key= 'Sen')],
     [sg.Checkbox('Impulso Unitário', key= 'IU'), sg.Checkbox('Degrau Unitário', key= 'DU'), sg.Checkbox('Sequência Sinusoidal', key= 'SS'), sg.Checkbox('Sequência Exponencial', key= 'SE')],
     [sg.Text('Nome do arquivo gerado'),sg.Input(size=(20,0), key= 'Nome')],
@@ -26,34 +27,35 @@ while True:
         T = float(value['T'])
         Ninicial = int(value['N'])
         a = float(value['A'])
+        Amp = float(value['Amplitude'])
 
         Nfinal = int(T*Fs)
-        n = np.arange(Ninicial, Nfinal-1, 1)
+        n = np.arange(Ninicial, Ninicial+Nfinal-1, 1)
         xn = []
 
         if value['IU'] == True:
             for i in range(len(n)):
                 if n[i] == 0:
-                    xn.append(1)
+                    xn.append(1*Amp)
                 else:
                     xn.append(0)
 
         elif value['DU'] == True:
             for i in range(len(n)):
                 if n[i] >= 0:
-                    xn.append(1)
+                    xn.append(1*Amp)
                 else:
                     xn.append(0)
 
         elif value['SS'] == True:
             if value['Sen'] == True:
-                xn = np.sin(2*np.pi*n*f/Fs)
+                xn = Amp*np.sin(2*np.pi*n*f/Fs)
             elif value['Cos'] == True:
-                xn = np.cos(2*np.pi*n*f/Fs)
+                xn = Amp*np.cos(2*np.pi*n*f/Fs)
 
         elif value['SE'] == True:
             for i in range(len(n)):
-                xn.append(a**(n[i]))
+                xn.append(Amp*(a**(n[i])))
 
         plt.xlabel('N')
         plt.ylabel('xn(N)')
