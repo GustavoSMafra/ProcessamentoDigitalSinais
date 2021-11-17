@@ -1,23 +1,29 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy import signal
 
-#file = input("Nome do arquivo: ")
-fc = float(input("Frequência de corte: "))
-#with open(file, 'rb') as fid:
-#    entrada = np.fromfile(fid, np.int16)
-#fid.close()
+fc = 0.25
+M = 150
+h = np.zeros(M)
+x = np.arange(-M/2, M/2, 1)
 
-entrada = np.ones(50)
+for i in range(M):
+    if i == M/2:
+        h[i] = 1
+    if i < M/2:
+        h[i] = (np.sin(2 * np.pi * fc * (-i+M/2))) / ((-i+M/2) * np.pi)
+    elif i > M/2:
+        h[i] = (np.sin(2 * np.pi * fc * (i-M/2))) / ((i-M/2) * np.pi)
 
-pi = np.pi
-print(pi)
 
-# Função Sinc
-h = np.zeros(len(entrada))
-for i in range(1, len(entrada)):
-     h[i] = (np.sin(2*pi*fc*i))/(i*pi)
+plt.plot(x, h, 'r')
+plt.title('Função Sinc')
+plt.grid()
+plt.show()
 
-plt.title("Função sinc para Fc = " + str(fc))
-plt.plot(h, 'r')
+fs = 8000
+plt.title("Resposta em frequência Sinc")
+[w, J] = signal.freqz(h, 1, fs)
+plt.plot(w*fs/(2*np.pi), 20*np.log10(abs(J)))
 plt.grid()
 plt.show()
