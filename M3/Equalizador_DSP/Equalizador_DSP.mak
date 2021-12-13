@@ -42,13 +42,9 @@ Debug/Equalizador_DSP.doj :Equalizador_DSP.c $(VDSP)/Blackfin/include/stdio.h $(
 	@echo ".\Equalizador_DSP.c"
 	$(VDSP)/ccblkfn.exe -c .\Equalizador_DSP.c -file-attr ProjectName=Equalizador_DSP -O -Ov100 -g -structs-do-not-overlap -no-multiline -D DO_CYCLE_COUNTS -double-size-32 -decls-strong -warn-protos -proc ADSP-BF533 -o .\Debug\Equalizador_DSP.doj -MM
 
-Debug/proc_rot.doj :proc_rot.c 
-	@echo ".\proc_rot.c"
-	$(VDSP)/ccblkfn.exe -c .\proc_rot.c -file-attr ProjectName=Equalizador_DSP -O -Ov100 -g -structs-do-not-overlap -no-multiline -D DO_CYCLE_COUNTS -double-size-32 -decls-strong -warn-protos -proc ADSP-BF533 -o .\Debug\proc_rot.doj -MM
-
-./Debug/Equalizador_DSP.dxe :$(VDSP)/Blackfin/ldf/adsp-BF533.ldf $(VDSP)/Blackfin/lib/bf532_rev_0.5/crtsf532y.doj ./Debug/Equalizador_DSP.doj ./Debug/proc_rot.doj $(VDSP)/Blackfin/lib/bf532_rev_0.5/__initsbsz532.doj $(VDSP)/Blackfin/lib/cplbtab533.doj $(VDSP)/Blackfin/lib/bf532_rev_0.5/crtn532y.doj $(VDSP)/Blackfin/lib/bf532_rev_0.5/libsmall532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/libio532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/libc532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/librt_fileio532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/libevent532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/libcpp532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/libf64ieee532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/libdsp532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/libsftflt532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/libetsi532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/Debug/libssl532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/Debug/libdrv532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/Debug/libusb532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/libprofile532y.dlb 
+./Debug/Equalizador_DSP.dxe :$(VDSP)/Blackfin/ldf/adsp-BF533.ldf $(VDSP)/Blackfin/lib/bf532_rev_0.5/crtsf532y.doj ./Debug/Equalizador_DSP.doj $(VDSP)/Blackfin/lib/bf532_rev_0.5/__initsbsz532.doj $(VDSP)/Blackfin/lib/cplbtab533.doj $(VDSP)/Blackfin/lib/bf532_rev_0.5/crtn532y.doj $(VDSP)/Blackfin/lib/bf532_rev_0.5/libsmall532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/libio532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/libc532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/librt_fileio532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/libevent532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/libcpp532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/libf64ieee532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/libdsp532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/libsftflt532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/libetsi532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/Debug/libssl532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/Debug/libdrv532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/Debug/libusb532y.dlb $(VDSP)/Blackfin/lib/bf532_rev_0.5/libprofile532y.dlb 
 	@echo "Linking..."
-	$(VDSP)/ccblkfn.exe .\Debug\Equalizador_DSP.doj .\Debug\proc_rot.doj -L .\Debug -add-debug-libpaths -flags-link -od,.\Debug -o .\Debug\Equalizador_DSP.dxe -proc ADSP-BF533 -MM
+	$(VDSP)/ccblkfn.exe .\Debug\Equalizador_DSP.doj -L .\Debug -add-debug-libpaths -flags-link -od,.\Debug -o .\Debug\Equalizador_DSP.dxe -proc ADSP-BF533 -MM
 
 endif
 
@@ -56,7 +52,6 @@ ifeq ($(MAKECMDGOALS),Equalizador_DSP_Debug_clean)
 
 Equalizador_DSP_Debug_clean:
 	-$(RM) "Debug\Equalizador_DSP.doj"
-	-$(RM) "Debug\proc_rot.doj"
 	-$(RM) ".\Debug\Equalizador_DSP.dxe"
 	-$(RM) ".\Debug\*.ipa"
 	-$(RM) ".\Debug\*.opa"
